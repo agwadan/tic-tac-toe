@@ -4,15 +4,16 @@ import { patterns } from './patterns';
 import './App.css';
 
 function App() {
-  const [board, setBoard] = useState(["","","","","","","","","",]);
+  const [board, setBoard] = useState(["", "", "", "", "", "", "", "", "",]);
   const [player, setPlayer] = useState("X");
-  const [result, setResult] = useState({winner: 'none', state: 'none'});
+  const [result, setResult] = useState({ winner: 'none', state: 'none' });
 
   useEffect(() => {
     checkWin();
+    checkIfTie();
     if (player == "X") {
       setPlayer("0");
-    } else {setPlayer("X")}
+    } else { setPlayer("X") }
   }, [board])
 
   useEffect(() => {
@@ -41,9 +42,22 @@ function App() {
         }
       })
       if (foundWinningPattern) {
-        setResult({winner: player, state: "Won"})
+        setResult({ winner: player, state: "Won" })
       }
     })
+  }
+
+  const checkIfTie = () => {
+    let filled = true;
+    board.forEach((square) => {
+      if (square == "") {
+        filled = false
+      } 
+    })
+
+    if (filled) {
+      setResult({winner: "No One", state: "Tie"})
+    }
   }
 
   return (
