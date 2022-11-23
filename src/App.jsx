@@ -10,6 +10,9 @@ function App() {
 
   useEffect(() => {
     checkWin();
+    if (player == "X") {
+      setPlayer("0");
+    } else {setPlayer("X")}
   }, [board])
 
   useEffect(() => {
@@ -25,10 +28,6 @@ function App() {
       }
       return val;
     }));
-
-    if (player == "X") {
-      setPlayer("0");
-    } else {setPlayer("X")}
   }
 
   const checkWin = () => {
